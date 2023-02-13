@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JobCardList matches snapshot 1`] = `
+<div
+  class="JobCardList"
+/>
+`;
