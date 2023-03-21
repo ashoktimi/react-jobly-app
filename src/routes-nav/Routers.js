@@ -112,24 +112,24 @@ const Routers = () =>{
   if (!infoLoaded) return <LoadingSpinner />;
 
     return(
-    <div>
-      <UserContext.Provider
-      value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}>
-      <NavBar logout={logout}/>
-      <Routes>   
-        <Route path='/' element={<Home />}/>  
-        <Route path='/login' element={<Login login={login}/>}/> 
-        <Route path='/signup' element={<Signup signup={signup}/>}/>  
-        <Route element={<PrivateRoute/>}>
-          <Route path='/companies' element={<CompanyList />}/>
-          <Route path='/companies/:id' element={<Company />}/>        
-          <Route path='/jobs' element={<JobList />}/>
-          <Route path='/profile' element={<Profile />}/>  
-        </Route>      
-        <Route path='/*' element={ <NotFound />}/> 
-      </Routes> 
-      </UserContext.Provider>     
-    </div>
+      <div>
+        <UserContext.Provider
+          value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}>
+          <NavBar logout={logout}/>
+          <Routes>   
+            <Route path='/' element={<Home />}/>  
+            <Route path='/login' element={<Login login={login}/>}/> 
+            <Route path='/signup' element={<Signup signup={signup}/>}/>  
+            <Route element={<PrivateRoute/>}>
+              <Route path='/companies' element={<CompanyList />}/>
+              <Route path='/companies/:id' element={<Company />}/>        
+              <Route path='/jobs' element={<JobList />}/>
+              <Route path='/profile' element={<Profile />}/>  
+            </Route>      
+            <Route path='/*' element={ <NotFound />}/> 
+          </Routes>
+        </UserContext.Provider>     
+      </div>
     )
 }
 

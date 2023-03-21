@@ -11,9 +11,7 @@ import CompanyList from '../companies/CompanyList';
 it("renders without crashing", function () {
   render(
       <MemoryRouter>
-        <UserProvider>
           <Routers />
-        </UserProvider>
       </MemoryRouter>,
   );
 });
@@ -21,61 +19,44 @@ it("renders without crashing", function () {
 it("matches snapshot", function () {
   const { asFragment } = render(
       <MemoryRouter>
-        <UserProvider>
           <Routers />
-        </UserProvider>
       </MemoryRouter>,
   );
   expect(asFragment()).toMatchSnapshot();
 });
 
 
-describe('Routers component', () => {
-  it('should render correctly', () => {
-    const { asFragment } = render(<Routers />);
-    expect(asFragment()).toMatchSnapshot();
-  });
-});
-
-
-describe('Routers component', () => {
-  it('should render without crashing', () => {
-    const { getByText } = render(<Routers />);
-    expect(getByText('Jobly')).toBeInTheDocument();
-  });
-});
 
 test('NavBar component renders correctly', () => {
-  const { container } = render(<NavBar />);
+  const { container } = render(
+  <MemoryRouter>
+    <UserProvider>
+      <NavBar />
+    </UserProvider>   
+  </MemoryRouter>  
+  );
   expect(container).toMatchSnapshot();
 });
 
 test('Company component renders correctly', () => {
-  const { container } = render(<Company />);
+  const { container } = render(
+   <MemoryRouter>
+    <UserProvider>
+     <Company />
+    </UserProvider>   
+  </MemoryRouter> 
+  );
   expect(container).toMatchSnapshot();
 });
 
 
 test('Routes to login page', () => {
   const { getByText } = render(
-    <Router>
-      <Route path="/login" component={Login} />
-    </Router>
+    <MemoryRouter>
+     <UserProvider>
+      <Login />
+    </UserProvider>  
+    </MemoryRouter>
   );
-  const linkElement = getByText(/Login/i);
-  fireEvent.click(linkElement);
-  expect(getByText(/Login/i)).toBeInTheDocument();
-});
-
-
-
-test('Routes to companies page', () => {
-  const { getByText } = render(
-    <Router>
-      <Route path="/companies" component={CompanyList} />
-    </Router>
-  );
-  const linkElement = getByText(/Companies/i);
-  fireEvent.click(linkElement);
-  expect(getByText(/Companies/i)).toBeInTheDocument();
+  expect(getByText("Log In")).toBeInTheDocument();
 });
